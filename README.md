@@ -2,7 +2,7 @@
 
 ## Hardware
 - *ESP32:* Core van het project
-- *WS2812B RGB LED strip:* Voor illuminatie letters, zie FastLED library
+- *WS2812B RGB LED strip:* Voor illuminatie letters, zie Adafruit Neopixel library
 - *SD-Card Reader:* Om externe MP3's om af te spelen als alarms
 - *I²S versterker module (MAX98357?):* Om MP3's te versterken en af te spelen
 - *Externe RTC module:* Houdt de tijd bij wanneer er geen internet beschikbaar is
