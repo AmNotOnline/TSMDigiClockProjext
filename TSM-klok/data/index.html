@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>CONFIG</title>
+</head>
+<body>
+    <center><img src="icon.png" class="icon"></center>
+    <h1>klok configuratie</h1>
+    <h2>wifi</h2><hr />
+    <p>Om de tijd automatisch op te vragen moet de klok verbonden zijn met het internet.</p>
+    <form>
+        <label>Naam van het netwerk (SSID)*</label><br>
+        <input type="text" id="SSID"><br><br>
+        <label>Wachtwoord*</label><br>
+        <input type="password" id="PSK"><br><br>
+    </form>
+
+    <h2>led</h2><hr />
+    <form>
+        <label>Kleur</label><br><br>
+        <input type="radio" id="cW" name="color"><label for="cW">WIT</label><br>
+        <input type="radio" id="cR" name="color"><label for="cR" style="color:red">ROOD</label><br>
+        <input type="radio" id="cG" name="color"><label for="cG" style="color:green">GROEN</label><br>
+        <input type="radio" id="cB" name="color"><label for="cB" style="color:blue">BLAUW</label><br>
+        <input type="radio" id="cC" name="color"><label for="cC" style="color:cyan">CYAAN</label><br>
+        <input type="radio" id="cGE" name="color"><label for="cGE" style="color:yellow">GEEL</label><br>
+        <input type="radio" id="cM" name="color"><label for="cM" style="color:magenta">MAGENTA</label><br>
+        <input type="radio" id="cA" name="color" checked><label for="cA">AUTOMATISCH</label><br>
+        <br>
+        <label>Intensiteit</label><br>
+        <input type="checkbox" id="autoInt" onclick="dispInt()"><label for="autoInt" style="font-weight: normal">Manueel ingestelde intensiteit gebruiken</label><br><br>
+        <input type="range" min="0" max="100" value="100" id="intensiteit" style="visibility:hidden"><br><br>
+        <button id="testLed" type="button" onclick="TestLed()">TEST</button>
+    </form>
+
+    <h2>audio</h2><hr />
+    <form>
+        <label>Volume</label><br>
+        <input type="range" min="0" max="100" value="100" id="volume" step="10"><br><br>
+        <button id="testAudio" type="button" onclick="TestAudio()">TEST</button>
+    </form>
+
+    <h2>tijd</h2><hr />
+    <input type="checkbox" id="auto" onclick="dispDt()"><label for="auto" style="font-weight: normal">Manueel ingestelde tijd gebruiken</label><br><br>
+    <input type="datetime-local" id="dt" style="visibility:hidden"><br>
+
+    <br><br><br>
+    <button id="verzenden" type="button" onclick="verzend(false)">VERZENDEN</button><br><br>
+    <button id="deleteConfig" type="button" onclick="deleteConfig()">ALLES RESETTEN</button>
+</body>
+</html>

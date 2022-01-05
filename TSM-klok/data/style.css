@@ -1,0 +1,42 @@
+﻿.icon {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+input[type=text] {
+    width: 50%;
+}
+input[type=password] {
+    width: 50%;
+}
+button {
+    background-color: orange;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    width: 50%;
+    height: 40px;
+}
+button:active {
+    background-color: coral;
+}
+label {
+    font-weight: bold;
+}
+input[type=color] {
+    width: 50%;
+    height: 40px;
+}
+input[type=range] {
+    width: 50%;
+}
+input[type=datetime-local] {
+    width: 50%;
+    height: 40px;
+}
