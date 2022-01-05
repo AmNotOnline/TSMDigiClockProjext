@@ -9,7 +9,7 @@
 #include <SD.h>
 #include <FS.h>
 
-// I/O pinnen voor Audio
+// I/O pinnen voor Audio en SD
 #define SD_CS          5
 #define SPI_MOSI      23
 #define SPI_MISO      19
@@ -21,7 +21,8 @@
 #define AUDIO_DEFAULTVOLUME 21 // 0..21
 
 // NeoPixel setup
-#define LED_PIN       
+#define LED_PIN       33
+#define LED_COUNT     60 // Hoeveelheid LEDs
 
 
 String ssid = "", psk = "", dt = "auto", color = "auto", intensity = "auto";
@@ -31,6 +32,7 @@ bool connected = false;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 Audio audio;
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void testVolume(byte vol) {
   // TODO: test volume
@@ -147,7 +149,9 @@ void setup() {
   audio.setPinout (I2S_BCLK, I2S_LRC, I2S_DOUT);
   audio.setVolume (AUDIO_DEFAULTVOLUME);
   audio.setBalance(0);  // Stereo perfect in het midden
-// end
+
+  strip.begin();
+  strip.show();         // Init alle LEDs als uit
 
   if(!SPIFFS.begin(true)){
     Serial.println("Couldn't mount SPIFFS");
