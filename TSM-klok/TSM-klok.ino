@@ -18,7 +18,8 @@
 #define I2S_BCLK      27
 #define I2S_LRC       26
 
-#define AUDIO_DEFAULTVOLUME 21 // 0..21
+#define AUDIO_DEFAULTVOLUME 21   // 0..21
+#define AUDIO_ISMONO        true // Maar één speaker aanwezig
 
 // NeoPixel setup
 #define LED_PIN       33
@@ -33,6 +34,13 @@ AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 Audio audio;
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+void musicStream(String file, byte volume, byte balance) {
+  audio.setVolume(volume);
+  audio.setBalance(balance);
+  audio.connecttoFS(SD, file);
+  audio.loop();     // loop over de muziekdata, moet in loop?
+}
 
 void testVolume(byte vol) {
   // TODO: test volume
@@ -149,6 +157,7 @@ void setup() {
   audio.setPinout (I2S_BCLK, I2S_LRC, I2S_DOUT);
   audio.setVolume (AUDIO_DEFAULTVOLUME);
   audio.setBalance(0);  // Stereo perfect in het midden
+  audio.forceMono (AUDIO_ISMONO);
 
   strip.begin();
   strip.show();         // Init alle LEDs als uit
