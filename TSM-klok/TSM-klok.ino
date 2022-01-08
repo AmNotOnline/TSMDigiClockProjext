@@ -35,10 +35,10 @@ AsyncWebSocket ws("/ws");
 Audio audio;
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-void musicStream(String file, byte volume, byte balance) {
+void musicStream(String file, byte volume) {
   audio.setVolume(volume);    // 0..21
-  audio.setBalance(balance);  // -16(L)..(16)(R)
-  audio.connecttoFS(SD, file);
+//  audio.setBalance(balance);  // -16(L)..(16)(R) overbodig in mono
+  audio.connecttoFS(SD, file.c_str());
   audio.loop();     // loop over de muziekdata, moet in loop?
 }
 
