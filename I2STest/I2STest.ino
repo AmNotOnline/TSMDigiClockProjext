@@ -3,19 +3,20 @@
 #include <FS.h>
 
 // I/O pinnen voor Audio en SD
-#define SD_CS         19
-#define SPI_MOSI      18
-#define SPI_MISO      17
-#define SPI_SCK       5
+#define SD_CS         21
+#define SPI_MOSI      19
+#define SPI_MISO      5
+#define SPI_SCK       18
 
 #define I2S_DOUT      25
 #define I2S_BCLK      26
-#define I2S_LRC       12
+#define I2S_LRC       27
 
-#define AUDIO_DEFAULTVOLUME 4   // 0..21
+#define AUDIO_DEFAULTVOLUME 12   // 0..21
 #define AUDIO_ISMONO        true // Maar één speaker aanwezig
 
-String file  = "BF - FF.mp3";
+String file  = "BBC - Bell Long.mp3";
+
 
 
 Audio audio;
