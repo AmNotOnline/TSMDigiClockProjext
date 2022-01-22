@@ -19,7 +19,7 @@
 // SD pin naar Vin / 5V
 // Vin naar 5V
 
-#define AUDIO_DEFAULTVOLUME 12   // 0..21
+#define AUDIO_DEFAULTVOLUME 5   // 0..21
 #define AUDIO_ISMONO        true // Maar één speaker aanwezig
 
 String file  = "BBC - Bell Long.mp3"; // Pad naar bestand dat moet worden afgespeeld
@@ -49,15 +49,15 @@ void setup() {
   audio.forceMono (AUDIO_ISMONO);
   audio.connecttoFS(SD, file.c_str());
 
-
 // DEBUGGING
   root = SD.open("/");
   listDirectory(root, 0);
 }
 
 void loop() {
-  audio.loop();  // Is zelf een loop en moet maar een keer uitgevoerd worden voor geluid af te spelen
-}
+  audio.loop();                               // Functie moet zo snel mogelijk geloopt worden om muziek af te spelen
+  audio.setVolume((analogRead(2) >> 6) / 3);  // Optimale? conversie van 0xFFF naar 21 voor potentiometer als volume-knop op bord
+}                                             // ADC op esp32 zijn 12 bits
 
 void audio_eof_mp3(const char *info) { // Wordt uitgevoerd wanneer sound file klaar is
 
@@ -71,13 +71,13 @@ void listDirectory(File dir, byte levels) {
       break;
     }
     for (byte i = 0; i < levels; i++) Serial.print('\t');
-    
+
     Serial.print(entry.name());
     if (entry.isDirectory()) {
       Serial.println("/");
       listDirectory(entry, levels + 1);
     } else { // Voor bestanden
-      Serial.print("\t\t");
+      Serial.print("\t\t\t\t\t\t\t\t");
       Serial.println(entry.size(), DEC);
     }
     entry.close();

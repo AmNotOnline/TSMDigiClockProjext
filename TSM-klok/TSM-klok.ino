@@ -35,6 +35,49 @@ AsyncWebSocket ws("/ws");
 Audio audio;
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
+struct dateFull {
+  byte jaar, maand, dag;  // Elks 2 digits
+};
+
+bool isVakantie(dateFull date) {
+  bool result = 0;
+  
+  byte dates[15][8] = 
+  //EK KM  SK  EK   PM SP  EP   SH EH   SK
+ [[ 9,  2, 27, 06,  4, 03, 18,  30, 6,  25],  // EK Einde kerstvakantie
+  [ 8,  2, 19, 26,  4, 02, 16,  29, 5,  24],  // KM Krokus maand
+  [ 7,  2, 11, 18,  3, 31, 14,  27, 3,  22],  // SK Start krokus
+  [ 5,  3, 02, 09,  4, 06, 21,  26, 2,  21],  // EK Einde krokus
+  [ 4,  2, 15, 22,  4, 05, 19,  01, 8,  20],  // PM Pasen maand
+                                              // SP Start pasen
+  [ 3,  2, 07, 14,  3, 28, 11,  31, 7,  26],  // EP Einde pasen
+  [ 9,  2, 27, 05,  4, 02, 17,  29, 5,  24],  // SH Start herfst
+  [ 7,  2, 11, 18,  4, 01, 15,  28, 4,  23],  // EH Einde herfst
+  [ 6,  3, 03, 10,  4, 07, 22,  27, 3,  22],  // SK Start kerst
+  [ 5,  2, 23, 02,  3, 06, 20,  26, 2,  21],
+
+  [ 4,  2, 08, 15,  3, 28, 11,  31, 7,  26],
+  [ 9,  2, 27, 06,  4, 03, 18,  30, 6,  25],
+  [ 8,  2, 19, 26,  4, 02, 16,  29, 5,  24],
+  [ 7,  2, 04, 11,  3, 25, 08,  28, 4,  23],
+  [ 6,  2, 24, 02,  4, 06, 20,  26, 2,  21]];
+  bool result = false;
+  byte jaar   = datum.jaar - 22;
+
+  switch (datum.maand) {
+    case 1:
+      if (datum.dag <= dates[jaar][0]) result = true;
+      break;
+
+    case 2 ... 3:
+        if (datum.maand == dates[jaar][1] && datum.dag >= dates[jaar][2]) { // In startmaand krokus + dag is >= startdag
+          return
+        }
+
+
+  }    
+}
+
 void musicStream(String file, byte volume) {
   audio.setVolume(volume);    // 0..21
 //  audio.setBalance(balance);  // -16(L)..(16)(R) overbodig in mono
