@@ -22,7 +22,8 @@
 #define AUDIO_DEFAULTVOLUME 5   // 0..21
 #define AUDIO_ISMONO        true // Maar één speaker aanwezig
 
-String file  = "BBC - Bell Long.mp3"; // Pad naar bestand dat moet worden afgespeeld
+String file  = "Mother Earth - MOTHER.mp3"; // Pad naar bestand dat moet worden afgespeeld
+byte   part  = 0;
 
 
 
@@ -56,11 +57,24 @@ void setup() {
 
 void loop() {
   audio.loop();                               // Functie moet zo snel mogelijk geloopt worden om muziek af te spelen
-  audio.setVolume((analogRead(2) >> 6) / 3);  // Optimale? conversie van 0xFFF naar 21 voor potentiometer als volume-knop op bord
+  audio.setVolume(analogRead(2) / 195);       // Optimale? conversie van 0xFFF naar 21 voor potentiometer als volume-knop op bord
 }                                             // ADC op esp32 zijn 12 bits
 
 void audio_eof_mp3(const char *info) { // Wordt uitgevoerd wanneer sound file klaar is
-
+  switch (part) {
+    case 0:
+      audio.connecttoFS(SD, "Bean Dreams OST - Fun Factory.mp3"); break;
+    case 1:
+      audio.connecttoFS(SD, "Beware the Forest's Mushrooms (NTSC-J Version) - Super Mario RPG.mp3"); break;
+    case 2:
+      audio.connecttoFS(SD, "Donkey Kong Country - Aquatic Ambience [Restored] OLD MIX.mp3"); break;
+    case 3:
+      audio.connecttoFS(SD, "Azalea Town - Pokimon Gold & Silver.mp3"); break;
+    case 4:
+      audio.connecttoFS(SD, "Smurfs' Nightmare Music (Game Boy) - Run! [The Mole's Burrow].mp3"); break;
+  }
+    part++;
+    if (part == 5) part = 0;
 }
 
 // OOK DEBUGGING: Print alle files op SD naar serial
@@ -77,7 +91,7 @@ void listDirectory(File dir, byte levels) {
       Serial.println("/");
       listDirectory(entry, levels + 1);
     } else { // Voor bestanden
-      Serial.print("\t\t\t\t\t\t\t\t");
+      Serial.print("\t\t\t\t\t\t");
       Serial.println(entry.size(), DEC);
     }
     entry.close();
