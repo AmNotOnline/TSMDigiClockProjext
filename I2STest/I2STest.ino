@@ -22,7 +22,7 @@
 #define AUDIO_DEFAULTVOLUME 5   // 0..21
 #define AUDIO_ISMONO        true // Maar één speaker aanwezig
 
-String file  = "Mother Earth - MOTHER.mp3"; // Pad naar bestand dat moet worden afgespeeld
+String file  = "Battletoads & Double dragon all versions music.mp3"; // Pad naar bestand dat moet worden afgespeeld
 byte   part  = 0;
 
 
